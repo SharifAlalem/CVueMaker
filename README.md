@@ -1,4 +1,4 @@
-# cvmaker
+# CVueMaker
 
 ## Project setup
 
