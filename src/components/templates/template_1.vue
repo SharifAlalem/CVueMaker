@@ -1,8 +1,8 @@
 <template>
-  <template class="container" :style="bgColor">
+  <template class="container" :style="bgColor" contenteditable="true">
     <aside>
       <div class="image">
-        <img :src="personalData.avatarImg" alt="avatar" width="100" />
+        <img v-if="personalImage !== ''" :src="personalImage" alt="avatar" width="100" />
       </div>
       <div class="contact">
         <h1>Contact Me</h1>
@@ -10,16 +10,17 @@
           <li>
             <span class="icon"> <i class="fa-location-pin fa-solid"></i> </span
             ><span class="text"
-              >{{ personalData.streetAndNum }} , {{ personalData.city }},{{ personalData.country }}
+              >{{ findValue(personalInfoData, "streetAndNum") }} ,
+              {{ findValue(personalInfoData, "city") }},{{ findValue(personalInfoData, "country") }}
             </span>
           </li>
           <li>
             <span class="icon"> <i class="fa-phone fa-solid"></i> </span
-            ><span class="text">{{ personalData.phone }} </span>
+            ><span class="text">{{ findValue(personalInfoData, "phone") }} </span>
           </li>
           <li>
             <span class="icon"> <i class="fa-at fa-solid"></i> </span
-            ><span class="text">{{ personalData.email }} </span>
+            ><span class="text">{{ findValue(personalInfoData, "email") }} </span>
           </li>
         </ul>
       </div>
@@ -44,6 +45,21 @@
         <h1>Other Info</h1>
         <div class="skills">
           <h2>skills</h2>
+          <ul>
+            <li v-for="skill in skillInfoData.forms" :key="skill.id">
+              <span class="Title"> {{ findValue(skill.data, "skillTitle") }} </span>
+
+              <div>
+                <span v-for="solid in findValue(skill.data, 'rating')" :key="solid">
+                  <i class="fa-star star fa-solid"></i>
+                </span>
+
+                <span v-for="regular in 5 - findValue(skill.data, 'rating')" :key="regular">
+                  <i class="fa-star star fa-regular"></i>
+                </span>
+              </div>
+            </li>
+          </ul>
         </div>
         <div class="awards">
           <h2>awards</h2>
@@ -58,50 +74,27 @@
     </aside>
     <main>
       <div class="personal">
-        <h1>{{ personalData.fname }} {{ personalData.lname }}</h1>
-        <h3>{{ personalData.profession }}</h3>
+        <h1>
+          {{ findValue(personalInfoData, "fname") }} {{ findValue(personalInfoData, "lname") }}
+        </h1>
+        <h3>{{ findValue(personalInfoData, "profession") }}</h3>
       </div>
       <div class="about">
         <h1>about me</h1>
-        <p>{{ personalData.summary }}</p>
+        <p>{{ findValue(personalInfoData, "summary") }}</p>
       </div>
       <div class="work">
         <h1>Experience</h1>
         <ul>
-          <li>
-            <span class="date">2018-2019 </span><span class="companyName">text text </span>
-            <span class="jobTitle">| text text </span>
-            <div class="responseabilties">
-              <ul>
-                <li>text</li>
-                <li>text</li>
-                <li>text</li>
-                <li>text</li>
-              </ul>
-            </div>
-          </li>
-          <li>
-            <span class="date">2018-2019 </span><span class="companyName">text text </span>
-            <span class="jobTitle">| text text </span>
-            <div class="responseabilties">
-              <ul>
-                <li>text</li>
-                <li>text</li>
-                <li>text</li>
-                <li>text</li>
-              </ul>
-            </div>
-          </li>
-          <li>
-            <span class="date">2018-2019 </span><span class="companyName">text text </span>
-            <span class="jobTitle">| text text </span>
-            <div class="responseabilties">
-              <ul>
-                <li>text</li>
-                <li>text</li>
-                <li>text</li>
-                <li>text</li>
-              </ul>
+          <li v-for="experience in workInfoData.forms" :key="experience.id">
+            <span class="date"
+              >{{ findValue(experience.data, "startDate") }} -{{
+                findValue(experience.data, "endDate")
+              }} </span
+            ><span class="companyName">{{ findValue(experience.data, "companyName") }} </span>
+            <span class="Title">| {{ findValue(experience.data, "jobTitle") }} </span>
+            <div class="summary">
+              {{ findValue(experience.data, "summary") }}
             </div>
           </li>
         </ul>
@@ -109,47 +102,28 @@
       <div class="education">
         <h1>Eduction</h1>
         <ul>
-          <li>
-            <span class="date">2018-2019 </span>
-            <span class="degreeTitle"> text text </span>
-            <span class="educationName">| text text </span>
-          </li>
-          <li>
-            <span class="date">2018-2019 </span>
-            <span class="degreeTitle"> text text </span>
-            <span class="educationName">| text text </span>
-          </li>
-          <li>
-            <span class="date">2018-2019 </span>
-            <span class="degreeTitle"> text text </span>
-            <span class="educationName">| text text </span>
+          <li v-for="education in educationInfoData.forms" :key="education.id">
+            <span class="date"
+              >{{ findValue(education.data, "startDate") }} -{{
+                findValue(education.data, "endDate")
+              }}
+            </span>
+            <span class="degreeTitle"> {{ findValue(education.data, "degreeTitle") }}</span>
+            <span class="educationName">| {{ findValue(education.data, "college") }} </span>
           </li>
         </ul>
       </div>
       <div class="projects">
         <h1>Projects</h1>
         <ul>
-          <li>
-            <span class="date">2018-2019 </span><span class="companyName">text text </span>
-            <span class="jobTitle">| text text </span>
-            <div class="responseabilties">
-              <ul>
-                <li>text</li>
-                <li>text</li>
-                <li>text</li>
-                <li>text</li>
-              </ul>
-            </div>
-          </li>
-          <li>
-            <span class="date">2018-2019 </span><span class="projectName">text text </span>
-            <div class="features">
-              <ul>
-                <li>text</li>
-                <li>text</li>
-                <li>text</li>
-                <li>text</li>
-              </ul>
+          <li v-for="project in projectInfoData.forms" :key="project.id">
+            <span class="date"
+              >{{ findValue(project.data, "startDate") }} - {{ findValue(project.data, "endDate") }}
+            </span>
+            <span class="companyName">{{ findValue(project.data, "companyName") }}</span>
+            <span class="Title">| {{ findValue(project.data, "projectTitle") }} </span>
+            <div class="summary">
+              {{ findValue(project.data, "description") }}
             </div>
           </li>
         </ul>
@@ -160,22 +134,18 @@
 </template>
 <script setup lang="ts">
 import { inject } from "vue";
-let bgColor: any = inject("bgColor");
-const personalInfoData: any = inject("personalInfoData");
 
-let personalData = {
-  avatarImg: personalInfoData.find((input: any) => input.inputName === "avatarImg").avatarImg,
-  fname: personalInfoData.find((input: any) => input.inputName === "fname").fname,
-  lname: personalInfoData.find((input: any) => input.inputName === "lname").lname,
-  phone: personalInfoData.find((input: any) => input.inputName === "phone").phone,
-  email: personalInfoData.find((input: any) => input.inputName === "email").email,
-  streetAndNum: personalInfoData.find((input: any) => input.inputName === "streetAndNum")
-    .streetAndNum,
-  city: personalInfoData.find((input: any) => input.inputName === "city").city,
-  country: personalInfoData.find((input: any) => input.inputName === "country").country,
-  dateOfBirth: personalInfoData.find((input: any) => input.inputName === "dateOfBirth").dateOfBirth,
-  profession: personalInfoData.find((input: any) => input.inputName === "profession").profession,
-  summary: personalInfoData.find((input: any) => input.inputName === "summary").summary,
+let bgColor: any = inject("bgColor");
+
+const personalImage: any = inject("personalImage");
+const personalInfoData: any = inject("personalInfoData");
+const skillInfoData: any = inject("skillInfoData");
+const educationInfoData: any = inject("educationInfoData");
+const workInfoData: any = inject("workInfoData");
+const projectInfoData: any = inject("projectInfoData");
+
+const findValue = (dataArray: any, targetValue: any) => {
+  return dataArray.find((input: any) => input.inputName === targetValue)[targetValue];
 };
 </script>
 
@@ -280,6 +250,19 @@ aside {
     }
     .text {
       font-size: 12px;
+    }
+  }
+
+  .rating {
+    list-style: none;
+    display: inline-flex;
+    padding: 0;
+    margin: 0;
+
+    .star {
+      padding: 10px 5px;
+      border-radius: 4px;
+      font-size: 20px;
     }
   }
 }

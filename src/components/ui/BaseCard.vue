@@ -38,8 +38,8 @@ const next = () => {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.5);
-  width: 50%;
-  padding: 30px;
+  width: 70%;
+  padding: 10px;
 }
 
 .actions {

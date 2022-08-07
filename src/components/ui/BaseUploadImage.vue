@@ -1,33 +1,49 @@
 <template>
   <div class="form-group">
     <div class="form-element">
-      <label>
-        <img src="@/assets/images/avatar.png" width="100" />
-        <input class="file-input" type="file" />
+      <label :class="{ active: previewImage !== '' }">
+        <img v-if="previewImage === ''" src="@/assets/images/avatar.png" width="100" />
+        <img class="personal" v-else :src="previewImage" width="100" />
+        <input
+          class="file-input"
+          type="file"
+          ref="personalImage"
+          @input="updateValue"
+          :value="modelValue"
+        />
       </label>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps } from "vue";
+import { ref, defineProps, inject } from "vue";
 
-// const props = defineProps<{
-//   classtype: string;
-//   type: string;
-//   label: string;
-//   placeholder: string;
-//   disabled: boolean;
-//   modelValue: any;
-// }>();
+const personalImage = ref("");
+let previewImage = ref("");
+const changeImage: any = inject("changeImage");
 
-// const emit = defineEmits<{
-//   (e: "update:modelValue", event: Event): void;
-// }>();
+const props = defineProps<{
+  classtype: string;
+  type: string;
+  label: string;
+  placeholder: string;
+  disabled: boolean;
+  modelValue: any;
+}>();
 
-// const updateValue = (event) => {
-//   emit("update:modelValue", event.target.value);
-// };
+const updateValue = () => {
+  let input: any = personalImage.value;
+  let file = input.files;
+  if (file && file[0]) {
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      previewImage.value = String(e.target!.result);
+      changeImage(previewImage);
+    };
+    reader.readAsDataURL(file[0]);
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -35,6 +51,7 @@ import { defineEmits, defineProps } from "vue";
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   margin-bottom: 20px;
 }
 
@@ -70,6 +87,9 @@ import { defineEmits, defineProps } from "vue";
       z-index: -3;
     }
 
+    &.active::after {
+      background-color: $green;
+    }
     &::after {
       content: "+";
       background-color: gray;

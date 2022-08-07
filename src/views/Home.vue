@@ -55,7 +55,8 @@ const after = () => {
 
 <style lang="scss">
 #home {
-  padding: 153px 0;
+  padding: 150px 0;
+  min-height: 100vh;
   height: 100%;
   display: flex;
   justify-content: center;

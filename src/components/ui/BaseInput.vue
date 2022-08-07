@@ -4,9 +4,8 @@
       <p>{{ label }}</p>
     </div>
     <div class="form-element">
-      <BaseUploadImage v-if="type === 'image'" class="block"></BaseUploadImage>
       <BaseRatingInput
-        v-else-if="type === 'rating'"
+        v-if="type === 'rating'"
         :maxNum="5"
         :formId="formId"
         class="block"
@@ -82,13 +81,12 @@ const emit = defineEmits<{
 }>();
 
 const updateValue = (event: any) => {
+  console.log("nnnn", event);
   emit("update:modelValue", event.target.value);
 };
 </script>
 
 <style lang="scss" scoped>
-$breakpoint-tablet: 860px;
-
 .form-group {
   margin: 10px 2%;
 }
@@ -125,6 +123,10 @@ textarea {
 
 .medium {
   width: 44%;
+
+  @media (max-width: $breakpoint-tablet) {
+    width: 95%;
+  }
 }
 
 .full {

@@ -27,11 +27,6 @@ const props = defineProps<{
 const callback = (index: number) => {
   changeRating(index, props.formId);
 };
-
-// const selectStar = (index: any) => {
-//   console.log(index);
-//   selectedStar.value = index + 1;
-// };
 </script>
 
 <style lang="scss" scoped>

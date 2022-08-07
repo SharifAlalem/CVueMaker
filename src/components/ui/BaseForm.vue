@@ -2,6 +2,8 @@
   <div>
     <slot></slot>
     <div class="form">
+      <BaseUploadImage v-if="withImageUpload" class="block" />
+
       <BaseInput
         :placeholder="input.placeholder"
         label=""
@@ -19,6 +21,7 @@
 
 <script setup lang="ts">
 import BaseInput from "./BaseInput.vue";
+import BaseUploadImage from "./BaseUploadImage.vue";
 
 import { defineProps } from "vue";
 
@@ -31,6 +34,10 @@ const props = defineProps({
     type: Number,
     required: false,
     default: null,
+  },
+  withImageUpload: {
+    type: Boolean,
+    required: false,
   },
 });
 </script>

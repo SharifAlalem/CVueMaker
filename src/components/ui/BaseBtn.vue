@@ -16,7 +16,7 @@ const emit = defineEmits<{
   (e: "click"): void;
 }>();
 
-const callback = (e:any) => {
+const callback = (e: any) => {
   emit("click");
 };
 </script>
@@ -24,26 +24,27 @@ const callback = (e:any) => {
 <style lang="scss" scoped>
 button {
   padding: 10px 20px;
-  border: 1px solid #ddd;
+  border: 2px solid white;
+  text-transform: uppercase;
   color: #333;
   background-color: #fff;
   border-radius: 4px;
   font-size: 14px;
-  font-family: "微软雅黑", arail;
+  box-shadow: 0px 3px 4px 0.01px rgba(0, 0, 0, 0.4);
   cursor: pointer;
   &[disabled] {
     cursor: not-allowed;
   }
   &.danger {
-    background-color: #ff4949;
+    background-color: $red;
     color: #fff;
   }
   &.success {
-    background-color: #13ce66;
+    background-color: $green;
     color: #fff;
   }
   &.info {
-    background-color: #50bfff;
+    background-color: $blue;
     color: #fff;
   }
 }

@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import TheHeader from "@/components/layouts/TheHeader.vue";
 import TheFooter from "@/components/layouts/TheFooter.vue";
-import { reactive, provide } from "vue";
+import { reactive, provide, ref } from "vue";
 
 let links: { url: string; name: string }[] = [
   { url: "/", name: "Home" },
@@ -21,14 +21,14 @@ let social: { icon: string; link: string }[] = [
 
 //DATA
 
+let personalImage = ref("");
+const changeImage = (newImage: any) => {
+  console.log("newImage", newImage.value);
+  personalImage.value = newImage.value;
+};
+provide("changeImage", changeImage);
+
 let personalInfoData = reactive([
-  {
-    inputName: "avatarImg",
-    avatarImg: "",
-    type: "image",
-    placeholder: "",
-    width: "full",
-  },
   {
     inputName: "fname",
     fname: "",
@@ -133,13 +133,6 @@ let educationInfoData = reactive({
           type: "date",
           placeholder: "",
           width: "medium",
-        },
-        {
-          inputName: "summary",
-          summary: "",
-          type: "textarea",
-          placeholder: " Summary",
-          width: "full",
         },
       ],
     },
@@ -307,6 +300,7 @@ const removeFormsData = (id: any, formType: string) => {
 };
 
 //providing Data
+provide("personalImage", personalImage);
 provide("personalInfoData", personalInfoData);
 provide("educationInfoData", educationInfoData);
 provide("workInfoData", workInfoData);

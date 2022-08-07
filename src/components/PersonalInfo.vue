@@ -3,7 +3,7 @@
     <div class="title">
       <h4>Personal Information</h4>
     </div>
-    <BaseForm :data="personalInfoData" />
+    <BaseForm :data="personalInfoData" :withImageUpload="true" />
   </section>
 </template>
 
@@ -12,5 +12,4 @@ import { defineProps, inject } from "vue";
 import BaseForm from "./ui/BaseForm.vue";
 
 const personalInfoData: any = inject("personalInfoData");
-
 </script>
