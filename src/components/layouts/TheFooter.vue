@@ -1,7 +1,7 @@
 <template>
   <footer :class="type">
     <div id="text">
-      <p>CvMaker Copyright © 2022 Sharif Alalem - Alle Rechte vorbehalten</p>
+      <p>CVueMaker Copyright © 2022 Sharif Alalem - All rights reserved</p>
     </div>
     <div id="social"></div>
   </footer>

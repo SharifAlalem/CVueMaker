@@ -10,7 +10,7 @@
         v-for="template in templatesInfoData"
         :key="template.templateId"
       >
-        <img src="@/assets/images/avatar.png" alt="template" width="100" />
+        <img src="@/assets/templates/template1.png" alt="template" />
       </router-link>
     </div>
   </section>
@@ -30,11 +30,21 @@ const templatesInfoData: any = inject("templatesInfoData");
   padding: 20px;
 
   .templateImage {
-    width: 28%;
-    border: 1px solid gray;
+    width: 40%;
+    height: 100%;
+    padding: 5px;
+    border: 2px solid gray;
     border-radius: 10px;
     margin: 5px;
     cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+    img {
+      width: 100%;
+    }
   }
 }
 </style>

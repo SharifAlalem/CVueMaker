@@ -259,6 +259,11 @@ let templatesInfoData = reactive([
     imageUrl: "skillTitle",
     selected: false,
   },
+  {
+    templateId: 1,
+    imageUrl: "skillTitle",
+    selected: false,
+  },
 ]);
 
 const changeRating = (index: number, formId: number) => {
@@ -321,11 +326,16 @@ body {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   background: linear-gradient(90deg, #1cb5e0 0%, #000851 100%);
+}
+
+.title {
+  font-size: $title-font;
+  text-transform: uppercase;
 }
 </style>
