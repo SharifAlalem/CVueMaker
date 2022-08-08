@@ -23,12 +23,14 @@ const callback = (e: any) => {
 
 <style lang="scss" scoped>
 button {
-  padding: 10px 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 10px;
   border: none;
   text-transform: uppercase;
   color: #333;
   background-color: #fff;
-  border-radius: 4px;
   font-size: 14px;
   transition: all 0.2s;
   cursor: pointer;
@@ -38,37 +40,48 @@ button {
   &.danger {
     background-color: $red;
     color: #fff;
-
-    &:hover {
-      box-shadow: $shadow;
-      border: 2px solid $dark-red;
-      color: $dark-red;
-    }
   }
   &.success {
-    background-color: $green;
+    background-color: $dark-blue;
     color: #fff;
-
-    &:hover {
-      box-shadow: $shadow;
-      border: 2px solid $dark-green;
-      color: $dark-green;
-    }
   }
   &.info {
     background-color: $blue;
-    color: #fff;
+    color: white;
+  }
+
+  &.download {
+    height: 40px;
+    color: white;
+    font-size: 18px;
+    border-radius: 10px 10px 0 0;
+    background-color: $dark-blue;
+
+    &:hover {
+      transform: scale(1);
+      height: 45px;
+      background-color: $dark-blue;
+      box-shadow: none;
+      color: white;
+    }
   }
 
   &.transparent {
-    background-color: transparent;
-    border: 1px solid black;
-    border-radius: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    color: $dark-blue;
+    font-size: 25px;
 
     &:hover {
+      transform: scale(1);
+      background-color: rgba(255, 255, 255, 1);
       box-shadow: $shadow;
-      background-color: white;
     }
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: $shadow;
   }
 }
 </style>

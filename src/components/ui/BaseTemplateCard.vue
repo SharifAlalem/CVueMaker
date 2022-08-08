@@ -18,7 +18,9 @@
           <label for="textcolor">Text Color</label>
         </div>
       </div>
-      <BaseBtnVue class="generateBtn" type="success" @click="generateReport">Generate</BaseBtnVue>
+      <BaseBtnVue class="generateBtn" type="download" @click="generateReport">
+        <i class="fa-solid fa-file-arrow-down icon"></i>Download Pdf</BaseBtnVue
+      >
     </div>
 
     <Vue3Html2pdf
@@ -122,8 +124,13 @@ const generateReport = () => {
       background-color: var(--font-color);
     }
   }
+
   .generateBtn {
-    width: 100%;
+    width: 250px;
+
+    .icon {
+      margin-right: 15px;
+    }
   }
 }
 </style>

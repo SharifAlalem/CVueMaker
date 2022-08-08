@@ -6,12 +6,13 @@
       :currentStep="currentIndex"
       :stepsArr="components"
     ></Progress>
+
     <BaseCard @prevComp="back" @nextComp="after" :currentIndex="currentIndex">
-      <keep-alive>
-        <transition name="fade" mode="out-in">
+      <Transition name="slide-fade" mode="out-in">
+        <keep-alive>
           <component class="component" :is="components[currentIndex].component"></component>
-        </transition>
-      </keep-alive>
+        </keep-alive>
+      </Transition>
     </BaseCard>
   </div>
 </template>
@@ -61,13 +62,21 @@ const after = () => {
   align-items: center;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+.slide-fade-enter-active {
+  transition: all 0.4s ease-in;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.slide-fade-leave-active {
+  transition: all 0.4s ease-in;
+}
+
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.slide-fade-enter-from {
+  transform: translateX(-20px);
   opacity: 0;
 }
 </style>

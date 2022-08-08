@@ -1,13 +1,28 @@
 <template>
   <section id="baseCard">
     <slot></slot>
-    <div class="actions">
-      <BaseBtn v-if="props.currentIndex !== 0" type="danger" :disabled="false" @click="prev"
-        >Prev</BaseBtn
+    <div
+      class="actions"
+      :class="{ 'actions-center': props.currentIndex === 0 || props.currentIndex === 5 }"
+    >
+      <BaseBtn
+        id="prev"
+        v-if="props.currentIndex !== 0"
+        type="transparent"
+        :disabled="false"
+        @click="prev"
       >
-      <BaseBtn v-if="props.currentIndex !== 5" type="success" :disabled="false" @click="next"
-        >Next</BaseBtn
+        <i class="fa-solid fa-chevron-left"></i>
+      </BaseBtn>
+      <BaseBtn
+        id="next"
+        v-if="props.currentIndex !== 5"
+        type="transparent"
+        :disabled="false"
+        @click="next"
       >
+        <i class="fa-solid fa-chevron-right"></i>
+      </BaseBtn>
     </div>
   </section>
 </template>
@@ -40,11 +55,29 @@ const next = () => {
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.5);
   width: 70%;
   padding: 10px;
+  position: relative;
 }
 
+#prev {
+  position: absolute;
+  top: 18%;
+  height: 70%;
+  left: -55px;
+}
+
+#next {
+  position: absolute;
+  top: 18%;
+  height: 70%;
+  right: -55px;
+}
 .actions {
   width: 100%;
   display: inline-flex;
   justify-content: space-between;
+}
+
+.actions-center {
+  justify-content: center;
 }
 </style>

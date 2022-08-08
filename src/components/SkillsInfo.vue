@@ -14,10 +14,11 @@
         type="danger"
         :disabled="false"
         @click="removeForm(SkillBlock.id)"
-        >Delete</BaseBtn
+        > <i class="fas fa-trash"></i
+      ></BaseBtn
       >
     </BaseForm>
-    <BaseBtn type="success" :disabled="false" @click="add">Add</BaseBtn>
+    <BaseBtn type="success" :disabled="false" @click="add"><i class="fas fa-plus"></i></BaseBtn>
   </section>
 </template>
 
