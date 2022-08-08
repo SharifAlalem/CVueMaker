@@ -32,7 +32,7 @@ footer {
   }
 
   &.solid {
-    background-color: darkblue;
+    background-color: $dark-blue;
   }
 
   #desktop {

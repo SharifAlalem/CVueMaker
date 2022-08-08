@@ -1,9 +1,15 @@
 <template>
   <div id="home">
+    <Progress
+      @selectStep="changeComponent"
+      :stepsNum="components.length"
+      :currentStep="currentIndex"
+      :stepsArr="components"
+    ></Progress>
     <BaseCard @prevComp="back" @nextComp="after" :currentIndex="currentIndex">
       <keep-alive>
         <transition name="fade" mode="out-in">
-          <component class="component" :is="components[currentIndex].compName"></component>
+          <component class="component" :is="components[currentIndex].component"></component>
         </transition>
       </keep-alive>
     </BaseCard>
@@ -17,32 +23,24 @@ import WorkInfo from "@/components/WorkInfo.vue";
 import ProjectsInfo from "@/components/ProjectsInfo.vue";
 import SkillsInfo from "@/components/SkillsInfo.vue";
 import TemplateChoose from "@/components/TemplateChoose.vue";
+import Progress from "@/components/Progress.vue";
 import BaseCard from "@/components/ui/BaseCard.vue";
-import { shallowRef, inject, watch } from "vue";
-import { useRoute } from "vue-router";
-
-const route = useRoute();
-// fetch the user information when params change
-watch(
-  () => route,
-  async (newId) => {
-    console.log(route);
-  }
-);
+import { shallowRef } from "vue";
 
 let currentIndex = shallowRef(0);
 
-const updateFormsData: any = inject("updateFormsData");
-const removeFormsData: any = inject("removeFormsData");
-
 let components = shallowRef([
-  { compName: PersonalInfo },
-  { compName: EducationInfo },
-  { compName: WorkInfo },
-  { compName: ProjectsInfo },
-  { compName: SkillsInfo },
-  { compName: TemplateChoose },
+  { Icon: "fa-user", component: PersonalInfo },
+  { Icon: "fa-graduation-cap", component: EducationInfo },
+  { Icon: "fa-briefcase", component: WorkInfo },
+  { Icon: "fa-diagram-project", component: ProjectsInfo },
+  { Icon: "fa-medal", component: SkillsInfo },
+  { Icon: "fa-file-signature", component: TemplateChoose },
 ]);
+
+const changeComponent = (index: any) => {
+  currentIndex.value = index;
+};
 
 const back = () => {
   currentIndex.value--;
@@ -55,11 +53,11 @@ const after = () => {
 
 <style lang="scss">
 #home {
-  padding: 150px 0;
+  padding: 90px 0;
   min-height: 80vh;
   height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
