@@ -2,7 +2,7 @@
   <header :class="type">
     <div id="desktop">
       <div id="logo-desktop">
-        <router-link to="/"><img :src="logo" alt="logo" width="100" /></router-link>
+        <router-link to="/"> CVue Maker</router-link>
       </div>
       <div id="header-desktop-nav">
         <router-link
@@ -42,15 +42,21 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 header {
-  padding: 10px 0;
+  padding: 20px 0;
+
   width: 100%;
 
+  #logo-desktop a {
+    color: white;
+    text-decoration: none;
+    padding-left: 20px;
+  }
   &.transparent {
     position: absolute;
     top: 0;
     z-index: 99999999;
 
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.2);
   }
 
   &.solid {

@@ -5,11 +5,11 @@
       <BaseUploadImage v-if="withImageUpload" class="block" />
 
       <BaseInput
+        :showLabel="input.type === 'date' ? true : false"
         :placeholder="input.placeholder"
-        label=""
+        :label="input.placeholder"
         :type="input.type"
         :classtype="input.width"
-        :disabled="false"
         :formId="id"
         v-for="input in data"
         :key="input.inputName"

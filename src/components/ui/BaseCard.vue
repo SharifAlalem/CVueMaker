@@ -59,17 +59,31 @@ const next = () => {
 }
 
 #prev {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   position: absolute;
   top: 18%;
   height: 70%;
   left: -55px;
+
+  @media (max-width: $breakpoint-mobile) {
+    height: 20%;
+    left: -40px;
+    z-index: 0;
+  }
 }
 
 #next {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   position: absolute;
   top: 18%;
   height: 70%;
   right: -55px;
+
+  @media (max-width: $breakpoint-mobile) {
+    height: 20%;
+    right: -40px;
+    z-index: 0;
+  }
 }
 .actions {
   width: 100%;

@@ -220,8 +220,10 @@ aside {
     margin-bottom: 30px;
   }
 
-  .image {
+  .image img {
+    margin: 20px;
     text-align: center;
+    border-radius: 50%;
   }
 
   h1 {

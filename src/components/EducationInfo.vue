@@ -18,7 +18,9 @@
         <i class="fas fa-trash"></i
       ></BaseBtn>
     </BaseForm>
-    <BaseBtn type="info" :disabled="false" @click="add"><i class="fas fa-plus"></i></BaseBtn>
+    <BaseBtn class="add" type="info" :disabled="false" @click="add"
+      ><i class="fas fa-plus"></i
+    ></BaseBtn>
   </section>
 </template>
 

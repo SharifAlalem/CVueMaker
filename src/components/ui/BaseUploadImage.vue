@@ -23,14 +23,32 @@ const personalImage = ref("");
 let previewImage = ref("");
 const changeImage: any = inject("changeImage");
 
-const props = defineProps<{
-  classtype: string;
-  type: string;
-  label: string;
-  placeholder: string;
-  disabled: boolean;
-  modelValue: any;
-}>();
+const props = defineProps({
+  classtype: {
+    type: String,
+    required: false,
+  },
+  type: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  label: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  placeholder: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  modelValue: {
+    required: false,
+    validator: (v) => true,
+    default: null,
+  },
+});
 
 const updateValue = () => {
   let input: any = personalImage.value;
@@ -97,7 +115,7 @@ const updateValue = () => {
       border: 1px solid white;
       position: absolute;
       color: white;
-      font-size: 25px;
+      font-size: 19px;
       text-align: center;
       width: 27px;
       height: 26px;

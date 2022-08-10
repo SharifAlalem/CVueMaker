@@ -1,6 +1,6 @@
 <template>
   <div class="form-group" :class="type !== 'image' ? classtype : 'block'">
-    <div class="label" v-if="label !== ''">
+    <div class="label" v-if="showLabel !== false">
       <p>{{ label }}</p>
     </div>
     <div class="form-element">
@@ -16,27 +16,31 @@
         v-else-if="type !== 'textarea'"
         class="full"
         :type="type"
-        :disabled="disabled"
         :placeholder="placeholder"
         :value="modelValue"
         @input="updateValue"
+        :disabled="checkedPresent === true"
       />
+
       <textarea
         v-else
         :type="type"
         class="full"
-        :disabled="disabled"
         :placeholder="placeholder"
         :value="String(modelValue)"
         @input="updateValue"
       ></textarea>
+
+      <div class="checkbox" v-if="label === 'End date'">
+        <input class="full" type="checkbox" @change="updateValue" />
+        <label for=""> Present</label>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps } from "vue";
-import BaseUploadImage from "./BaseUploadImage.vue";
+import { defineEmits, defineProps, ref } from "vue";
 import BaseRatingInput from "./BaseRatingInput.vue";
 
 const props = defineProps({
@@ -59,11 +63,6 @@ const props = defineProps({
     required: false,
     default: null,
   },
-  disabled: {
-    type: Boolean,
-    required: false,
-    default: null,
-  },
   modelValue: {
     required: false,
     validator: (v) => true,
@@ -74,26 +73,45 @@ const props = defineProps({
     required: false,
     default: null,
   },
+  showLabel: {
+    type: Boolean,
+    required: false,
+    default: null,
+  },
 });
 
+let checkedPresent = ref(false);
 const emit = defineEmits<{
   (e: "update:modelValue", event: Event): void;
 }>();
 
 const updateValue = (event: any) => {
-  console.log("nnnn", event);
+  console.log(event);
+  if (event.target.type === "checkbox") {
+    checkedPresent.value = !checkedPresent.value;
+    event.target.value = "present";
+  }
   emit("update:modelValue", event.target.value);
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/styles/mixins";
 .form-group {
   margin: 10px 2%;
+}
+
+.label {
+  float: left;
+  font-size: 13px;
+  padding-left: 8px;
+  line-height: 10px;
+  text-transform: uppercase;
 }
 input,
 textarea {
   padding: 10px 5px;
-  border: 2px solid #ddd;
+  border: 2px solid lightgrey;
   color: #333;
   background-color: #fff;
   border-radius: 4px;
@@ -103,13 +121,23 @@ textarea {
     cursor: not-allowed;
   }
   &.danger {
-    border-color: #ff4949;
+    border-color: $red;
   }
   &.success {
-    border-color: #13ce66;
+    border-color: $green;
   }
   &.info {
-    border-color: #50bfff;
+    border-color: $blue;
+  }
+
+  &::placeholder {
+    text-transform: uppercase;
+  }
+
+  &:focus {
+    border: 2px solid $blue;
+    outline: none;
+    @include shadow_color(rgb(80, 191, 255, 0.2));
   }
 }
 
@@ -138,5 +166,27 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.checkbox {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 5px;
+  color: #333;
+  background-color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+
+  label {
+    font-weight: bold;
+  }
+
+  input {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
 }
 </style>

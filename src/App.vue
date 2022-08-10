@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <i v-for="(svg, index) in floatingSvgs" :key="index" class="svg fas" :class="svg.icon"></i>
+  </div>
   <TheHeader :logo="require('@/assets/images/logo.png')" :type="'transparent'" :links="links" />
   <router-view />
   <TheFooter :type="'solid'" :social="social" />
@@ -7,7 +10,7 @@
 <script setup lang="ts">
 import TheHeader from "@/components/layouts/TheHeader.vue";
 import TheFooter from "@/components/layouts/TheFooter.vue";
-import { reactive, provide, ref } from "vue";
+import { reactive, provide, ref, onMounted } from "vue";
 
 let links: { url: string; name: string }[] = [
   { url: "/", name: "Home" },
@@ -19,8 +22,22 @@ let social: { icon: string; link: string }[] = [
   { icon: "test", link: "About" },
 ];
 
-//DATA
+let floatingSvgs = ref([
+  { icon: "fa-user" },
+  { icon: "fa-graduation-cap" },
+  { icon: "fa-briefcase" },
+  { icon: "fa-diagram-project" },
+  { icon: "fa-medal" },
+  { icon: "fa-file-signature" },
+  { icon: "fa-user" },
+  { icon: "fa-graduation-cap" },
+  { icon: "fa-briefcase" },
+  { icon: "fa-diagram-project" },
+  { icon: "fa-medal" },
+  { icon: "fa-file-signature" },
+]);
 
+//DATA
 let personalImage = ref("");
 const changeImage = (newImage: any) => {
   console.log("newImage", newImage.value);
@@ -82,7 +99,7 @@ let personalInfoData = reactive([
     inputName: "dateOfBirth",
     dateOfBirth: "",
     type: "date",
-    placeholder: "",
+    placeholder: "Date of birth",
     width: "full",
   },
   {
@@ -124,14 +141,14 @@ let educationInfoData = reactive({
           inputName: "startDate",
           startDate: "",
           type: "date",
-          placeholder: " ",
+          placeholder: "Start date",
           width: "medium",
         },
         {
           inputName: "endDate",
           endDate: "",
           type: "date",
-          placeholder: "",
+          placeholder: "End date",
           width: "medium",
         },
       ],
@@ -162,14 +179,14 @@ let workInfoData = reactive({
           inputName: "startDate",
           startDate: "",
           type: "date",
-          placeholder: " ",
+          placeholder: "Start date",
           width: "medium",
         },
         {
           inputName: "endDate",
           endDate: "",
           type: "date",
-          placeholder: "",
+          placeholder: "End date",
           width: "medium",
         },
         {
@@ -207,14 +224,14 @@ let projectInfoData = reactive({
           inputName: "startDate",
           startDate: "",
           type: "date",
-          placeholder: " ",
+          placeholder: "Start date",
           width: "medium",
         },
         {
           inputName: "endDate",
           endDate: "",
           type: "date",
-          placeholder: "",
+          placeholder: "End date",
           width: "medium",
         },
         {
@@ -323,6 +340,7 @@ provide("removeFormsData", removeFormsData);
 html,
 body {
   margin: 0;
+  overflow-x: hidden;
 }
 
 #app {
@@ -330,11 +348,71 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background: linear-gradient(180deg, $blue 0%, $dark-blue 100%);
+  background: linear-gradient(-30deg, #002b5b, #2b4865, #256d85, #8fe3cf);
+  background-size: 400% 400%;
+  animation: gradient 5s ease infinite;
 }
 
 .title {
   font-size: $title-font;
   text-transform: uppercase;
+}
+
+.svg {
+  width: 100px;
+  height: 100px;
+  color: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  bottom: 90vh;
+  transform-style: preserve-3d;
+  opacity: 0;
+}
+
+$total: 10;
+@for $i from 1 through $total {
+  //$scale: random(1) - 0.9;
+
+  .svg:nth-child(#{$i}) {
+    left: $i * 10%-10%;
+
+    animation: raise#{$i} 10 + $i + $i * 0.01 + s linear infinite;
+
+    animation-delay: random(20) - 20 + s;
+
+    z-index: 0;
+    //filter: blur($i - 6 + px);
+
+    @keyframes raise#{$i} {
+      0% {
+        transform: scale(0.9);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.5);
+      }
+
+      100% {
+        opacity: 0;
+        bottom: 0vh;
+        transform: scale(0.9);
+      }
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      left: $i * 10%-30%;
+    }
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 </style>

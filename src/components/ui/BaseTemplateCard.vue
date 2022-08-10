@@ -18,7 +18,7 @@
           <label for="textcolor">Text Color</label>
         </div>
       </div>
-      <BaseBtnVue class="generateBtn" type="download" @click="generateReport">
+      <BaseBtnVue :disabled="false" class="generateBtn" type="download" @click="generateReport">
         <i class="fa-solid fa-file-arrow-down icon"></i>Download Pdf</BaseBtnVue
       >
     </div>
@@ -52,12 +52,10 @@ import { ref, reactive, provide } from "vue";
 let bgColor = reactive({ "--bg-color": "#0930A5", "--font-color": "#ffffff" });
 provide("bgColor", bgColor);
 const changebgColor = ($event: any) => {
-  console.log($event);
   bgColor["--bg-color"] = $event.target.value;
 };
 
 const changefontColor = ($event: any) => {
-  console.log($event);
   bgColor["--font-color"] = $event.target.value;
 };
 
