@@ -241,6 +241,13 @@ let projectInfoData = reactive({
           placeholder: " Description",
           width: "full",
         },
+        {
+          inputName: "link",
+          link: "",
+          type: "url",
+          placeholder: " link",
+          width: "full",
+        },
       ],
     },
   ],
@@ -271,11 +278,6 @@ let skillInfoData = reactive({
 });
 
 let templatesInfoData = reactive([
-  {
-    templateId: 1,
-    imageUrl: "skillTitle",
-    selected: false,
-  },
   {
     templateId: 1,
     imageUrl: "skillTitle",
@@ -359,6 +361,7 @@ body {
 }
 
 .svg {
+  pointer-events: none;
   width: 100px;
   height: 100px;
   color: rgba(255, 255, 255, 0.2);
@@ -398,7 +401,7 @@ $total: 10;
       }
     }
 
-    @media (max-width: $breakpoint-mobile) {
+    @media (max-width: $breakpoint-tablet) {
       left: $i * 10%-30%;
     }
   }

@@ -54,7 +54,7 @@ button {
     height: 40px;
     color: white;
     font-size: 18px;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px;
     background-color: $dark-blue;
 
     &:hover {

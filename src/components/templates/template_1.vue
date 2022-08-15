@@ -1,5 +1,11 @@
 <template>
-  <template class="container" :style="bgColor" contenteditable="true">
+  <template
+    ref="pdfContent"
+    id="template1"
+    class="container"
+    :style="bgColor"
+    contenteditable="true"
+  >
     <aside>
       <div class="image">
         <img v-if="personalImage !== ''" :src="personalImage" alt="avatar" width="100" />
@@ -118,13 +124,17 @@
         <ul>
           <li v-for="project in projectInfoData.forms" :key="project.id">
             <span class="date"
-              >{{ findValue(project.data, "startDate") }} - {{ findValue(project.data, "endDate") }}
+              >{{ findValue(project.data, "startDate") }} -
+              {{ findValue(project.data, "endDate") }}
             </span>
             <span class="companyName">{{ findValue(project.data, "companyName") }}</span>
             <span class="Title">| {{ findValue(project.data, "projectTitle") }} </span>
             <div class="summary">
               {{ findValue(project.data, "description") }}
             </div>
+            <a :href="findValue(project.data, 'link')">
+              {{ findValue(project.data, "link") }}
+            </a>
           </li>
         </ul>
       </div>
@@ -133,9 +143,10 @@
   </template>
 </template>
 <script setup lang="ts">
-import { inject } from "vue";
+import { inject, ref, onMounted } from "vue";
 
 let bgColor: any = inject("bgColor");
+let pdfContent: any = ref(null);
 
 const personalImage: any = inject("personalImage");
 const personalInfoData: any = inject("personalInfoData");
@@ -143,6 +154,11 @@ const skillInfoData: any = inject("skillInfoData");
 const educationInfoData: any = inject("educationInfoData");
 const workInfoData: any = inject("workInfoData");
 const projectInfoData: any = inject("projectInfoData");
+const updatepdfContent: any = inject("updatepdfContent");
+
+onMounted(() => {
+  updatepdfContent(pdfContent.value);
+});
 
 const findValue = (dataArray: any, targetValue: any) => {
   return dataArray.find((input: any) => input.inputName === targetValue)[targetValue];
@@ -165,6 +181,7 @@ button {
 }
 
 .container {
+  font-family: "Open Sans", sans-serif;
   width: 100%;
   display: grid;
   grid-template-columns: 0.3fr 1fr;
@@ -182,7 +199,7 @@ main {
   text-align: left;
   justify-content: center;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
 
   div {
     margin-bottom: 30px;

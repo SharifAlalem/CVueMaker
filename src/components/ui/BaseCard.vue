@@ -56,6 +56,7 @@ const next = () => {
   width: 70%;
   padding: 10px;
   position: relative;
+  z-index: 1;
 }
 
 #prev {

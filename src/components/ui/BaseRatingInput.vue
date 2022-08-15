@@ -2,10 +2,10 @@
   <div id="rating">
     <ul>
       <li v-for="(rate, index) in maxNum" :key="rate" @click="callback(index)">
-        <span v-if="index < value">
+        <span class="solid" v-if="index < value">
           <i class="fa-star star fa-solid"></i>
         </span>
-        <span v-else>
+        <span class="regular" v-else>
           <i class="fa-star star fa-regular"></i>
         </span>
       </li>
@@ -41,9 +41,14 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+.solid,
+.regular {
+  color: $blue;
+}
 .star {
+  cursor: pointer;
   padding: 10px 5px;
-  color: #333;
   background-color: #fff;
   border-radius: 4px;
   font-size: 20px;
@@ -65,7 +70,7 @@ ul {
   }
 
   &:hover {
-    color: red;
+    color: $blue;
   }
 }
 </style>

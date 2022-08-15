@@ -18,5 +18,9 @@ import template_1 from "@/components/templates/template_1.vue";
 #templates {
   padding: 100px 80px;
   height: 100%;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 100px 20px;
+  }
 }
 </style>
