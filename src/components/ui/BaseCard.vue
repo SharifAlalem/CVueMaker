@@ -3,7 +3,9 @@
     <slot></slot>
     <div
       class="actions"
-      :class="{ 'actions-center': props.currentIndex === 0 || props.currentIndex === 5 }"
+      :class="{
+        'actions-center': props.currentIndex === 0 || props.currentIndex === 5,
+      }"
     >
       <BaseBtn
         id="prev"

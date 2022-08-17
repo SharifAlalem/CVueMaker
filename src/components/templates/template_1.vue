@@ -8,7 +8,12 @@
   >
     <aside>
       <div class="image">
-        <img v-if="personalImage !== ''" :src="personalImage" alt="avatar" width="100" />
+        <img
+          v-if="personalImage !== ''"
+          :src="personalImage"
+          alt="avatar"
+          width="100"
+        />
       </div>
       <div class="contact">
         <h1>Contact Me</h1>
@@ -17,16 +22,22 @@
             <span class="icon"> <i class="fa-location-pin fa-solid"></i> </span
             ><span class="text"
               >{{ findValue(personalInfoData, "streetAndNum") }} ,
-              {{ findValue(personalInfoData, "city") }},{{ findValue(personalInfoData, "country") }}
+              {{ findValue(personalInfoData, "city") }},{{
+                findValue(personalInfoData, "country")
+              }}
             </span>
           </li>
           <li>
             <span class="icon"> <i class="fa-phone fa-solid"></i> </span
-            ><span class="text">{{ findValue(personalInfoData, "phone") }} </span>
+            ><span class="text"
+              >{{ findValue(personalInfoData, "phone") }}
+            </span>
           </li>
           <li>
             <span class="icon"> <i class="fa-at fa-solid"></i> </span
-            ><span class="text">{{ findValue(personalInfoData, "email") }} </span>
+            ><span class="text"
+              >{{ findValue(personalInfoData, "email") }}
+            </span>
           </li>
         </ul>
       </div>
@@ -53,14 +64,22 @@
           <h2>skills</h2>
           <ul>
             <li v-for="skill in skillInfoData.forms" :key="skill.id">
-              <span class="Title"> {{ findValue(skill.data, "skillTitle") }} </span>
+              <span class="Title">
+                {{ findValue(skill.data, "skillTitle") }}
+              </span>
 
               <div>
-                <span v-for="solid in findValue(skill.data, 'rating')" :key="solid">
+                <span
+                  v-for="solid in findValue(skill.data, 'rating')"
+                  :key="solid"
+                >
                   <i class="fa-star star fa-solid"></i>
                 </span>
 
-                <span v-for="regular in 5 - findValue(skill.data, 'rating')" :key="regular">
+                <span
+                  v-for="regular in 5 - findValue(skill.data, 'rating')"
+                  :key="regular"
+                >
                   <i class="fa-star star fa-regular"></i>
                 </span>
               </div>
@@ -81,7 +100,8 @@
     <main>
       <div class="personal">
         <h1>
-          {{ findValue(personalInfoData, "fname") }} {{ findValue(personalInfoData, "lname") }}
+          {{ findValue(personalInfoData, "fname") }}
+          {{ findValue(personalInfoData, "lname") }}
         </h1>
         <h3>{{ findValue(personalInfoData, "profession") }}</h3>
       </div>
@@ -97,8 +117,12 @@
               >{{ findValue(experience.data, "startDate") }} -{{
                 findValue(experience.data, "endDate")
               }} </span
-            ><span class="companyName">{{ findValue(experience.data, "companyName") }} </span>
-            <span class="Title">| {{ findValue(experience.data, "jobTitle") }} </span>
+            ><span class="companyName"
+              >{{ findValue(experience.data, "companyName") }}
+            </span>
+            <span class="Title"
+              >| {{ findValue(experience.data, "jobTitle") }}
+            </span>
             <div class="summary">
               {{ findValue(experience.data, "summary") }}
             </div>
@@ -114,8 +138,12 @@
                 findValue(education.data, "endDate")
               }}
             </span>
-            <span class="degreeTitle"> {{ findValue(education.data, "degreeTitle") }}</span>
-            <span class="educationName">| {{ findValue(education.data, "college") }} </span>
+            <span class="degreeTitle">
+              {{ findValue(education.data, "degreeTitle") }}</span
+            >
+            <span class="educationName"
+              >| {{ findValue(education.data, "college") }}
+            </span>
           </li>
         </ul>
       </div>
@@ -127,8 +155,12 @@
               >{{ findValue(project.data, "startDate") }} -
               {{ findValue(project.data, "endDate") }}
             </span>
-            <span class="companyName">{{ findValue(project.data, "companyName") }}</span>
-            <span class="Title">| {{ findValue(project.data, "projectTitle") }} </span>
+            <span class="companyName">{{
+              findValue(project.data, "companyName")
+            }}</span>
+            <span class="Title"
+              >| {{ findValue(project.data, "projectTitle") }}
+            </span>
             <div class="summary">
               {{ findValue(project.data, "description") }}
             </div>
@@ -161,7 +193,9 @@ onMounted(() => {
 });
 
 const findValue = (dataArray: any, targetValue: any) => {
-  return dataArray.find((input: any) => input.inputName === targetValue)[targetValue];
+  return dataArray.find((input: any) => input.inputName === targetValue)[
+    targetValue
+  ];
 };
 </script>
 

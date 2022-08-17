@@ -10,7 +10,10 @@
     <BaseCard @prevComp="back" @nextComp="after" :currentIndex="currentIndex">
       <Transition name="slide-fade" mode="out-in">
         <keep-alive>
-          <component class="component" :is="components[currentIndex].component"></component>
+          <component
+            class="component"
+            :is="components[currentIndex].component"
+          ></component>
         </keep-alive>
       </Transition>
     </BaseCard>
@@ -48,7 +51,9 @@ const back = () => {
 };
 
 const after = () => {
-  currentIndex.value !== components.value.length - 1 ? currentIndex.value++ : "";
+  currentIndex.value !== components.value.length - 1
+    ? currentIndex.value++
+    : "";
 };
 </script>
 

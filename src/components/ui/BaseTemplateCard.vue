@@ -32,7 +32,10 @@ import { ref, reactive, provide, inject } from "vue";
 
 const personalInfoData: any = inject("personalInfoData");
 //theme dynamic change color
-let bgColor: any = reactive({ "--bg-color": "#0930A5", "--font-color": "#ffffff" });
+let bgColor: any = reactive({
+  "--bg-color": "#0930A5",
+  "--font-color": "#ffffff",
+});
 
 const changebgColor = ($event: any) => {
   bgColor["--bg-color"] = $event.target.value;
@@ -54,7 +57,9 @@ let pdfOptions: any = reactive({
   previewModal: false,
   paginateElementsByHeight: 2500,
   manualPagination: true,
-  filename: personalInfoData.find((input: any) => input.inputName === "fname")["fname"],
+  filename: personalInfoData.find((input: any) => input.inputName === "fname")[
+    "fname"
+  ],
   pdfQuality: 2,
   pdfFormat: "a4",
   pdfOrientation: "portrait",
@@ -134,12 +139,16 @@ const paginationOfElements = () => {
         const elementComputedStyle =
           childElement.currentStyle || window.getComputedStyle(childElement);
         const elementMarginTopBottom = 1100;
-        parseInt(elementComputedStyle.marginTop) + parseInt(elementComputedStyle.marginBottom);
+        parseInt(elementComputedStyle.marginTop) +
+          parseInt(elementComputedStyle.marginBottom);
 
         // Add Both Element Height with the Elements Margin Top and Bottom
         const elementHeightWithMargin = elementHeight + elementMarginTopBottom;
 
-        if (childrenHeight + elementHeight < pdfOptions.paginateElementsByHeight) {
+        if (
+          childrenHeight + elementHeight <
+          pdfOptions.paginateElementsByHeight
+        ) {
           childrenHeight += elementHeightWithMargin;
         } else {
           const section = document.createElement("div");

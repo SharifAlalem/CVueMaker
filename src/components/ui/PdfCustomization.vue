@@ -6,16 +6,25 @@
         <div class="control-item" v-for="(control, key) in controls" :key="key">
           <div class="control">
             <select
-              v-if="control.vModel === 'pdfOrientation' || control.vModel === 'pdfFormat'"
+              v-if="
+                control.vModel === 'pdfOrientation' ||
+                control.vModel === 'pdfFormat'
+              "
               :value="control.options[0]"
               @change="setInput($event, control.vModel, control.inputType)"
             >
-              <option v-for="opt in control.options" :value="opt" :key="opt">{{ opt }}</option>
+              <option v-for="opt in control.options" :value="opt" :key="opt">
+                {{ opt }}
+              </option>
             </select>
 
             <input
               v-else
-              :class="control.inputType === 'checkbox' ? 'input-checkbox' : 'input-box'"
+              :class="
+                control.inputType === 'checkbox'
+                  ? 'input-checkbox'
+                  : 'input-box'
+              "
               :type="control.inputType"
               :value="control.value"
               :checked="control.value"
@@ -29,7 +38,12 @@
         </div>
 
         <div class="bgColor control-item">
-          <input id="bgcolor" type="color" :value="bgColor['--bg-color']" @change="changebgColor" />
+          <input
+            id="bgcolor"
+            type="color"
+            :value="bgColor['--bg-color']"
+            @change="changebgColor"
+          />
           <label for="bgcolor">Theme Color</label>
         </div>
         <div class="textColor control-item">
@@ -43,7 +57,12 @@
         </div>
       </div>
 
-      <BaseBtnVue :disabled="false" class="generateBtn" type="download" @click="generateReport">
+      <BaseBtnVue
+        :disabled="false"
+        class="generateBtn"
+        type="download"
+        @click="generateReport"
+      >
         <i class="fa-solid fa-file-arrow-down icon"></i>Generate PDF
       </BaseBtnVue>
 
@@ -106,7 +125,21 @@ let controls = reactive([
   {
     label: "pdf-format",
     type: "String",
-    options: ["a4", "a0", "a1", "a2", "a3", "letter", "legal", "a5", "a6", "a7", "a8", "a9", "a10"],
+    options: [
+      "a4",
+      "a0",
+      "a1",
+      "a2",
+      "a3",
+      "letter",
+      "legal",
+      "a5",
+      "a6",
+      "a7",
+      "a8",
+      "a9",
+      "a10",
+    ],
     inputType: "text",
     vModel: "pdfFormat",
     value: "a4",

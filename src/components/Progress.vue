@@ -40,7 +40,7 @@ const selectStep = (index: any) => {
 </script>
 
 <style lang="scss" scoped>
-#progress-bar{
+#progress-bar {
   margin-bottom: 30px;
 }
 

@@ -1,5 +1,10 @@
 <template>
-  <button class="normal" :class="type" :disabled="disabled" @click="callback($event)">
+  <button
+    class="normal"
+    :class="type"
+    :disabled="disabled"
+    @click="callback($event)"
+  >
     <slot></slot>
   </button>
 </template>

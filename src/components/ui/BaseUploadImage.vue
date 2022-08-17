@@ -2,7 +2,11 @@
   <div class="form-group">
     <div class="form-element">
       <label :class="{ active: previewImage !== '' }">
-        <img v-if="previewImage === ''" src="@/assets/images/avatar.png" width="100" />
+        <img
+          v-if="previewImage === ''"
+          src="@/assets/images/avatar.png"
+          width="100"
+        />
         <img class="personal" v-else :src="previewImage" width="100" />
         <input
           class="file-input"

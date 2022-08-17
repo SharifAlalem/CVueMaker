@@ -1,8 +1,17 @@
 <template>
   <div>
-    <i v-for="(svg, index) in floatingSvgs" :key="index" class="svg fas" :class="svg.icon"></i>
+    <i
+      v-for="(svg, index) in floatingSvgs"
+      :key="index"
+      class="svg fas"
+      :class="svg.icon"
+    ></i>
   </div>
-  <TheHeader :logo="require('@/assets/images/logo.png')" :type="'transparent'" :links="links" />
+  <TheHeader
+    :logo="require('@/assets/images/logo.png')"
+    :type="'transparent'"
+    :links="links"
+  />
   <router-view />
   <TheFooter :type="'solid'" :social="social" />
 </template>
@@ -306,9 +315,11 @@ const updateFormsData = (newForm: any, formType: string) => {
 
 const removeFormsData = (id: any, formType: string) => {
   if (formType === "education")
-    educationInfoData.forms = educationInfoData.forms.filter((educationBlock) => {
-      return educationBlock.id !== id;
-    });
+    educationInfoData.forms = educationInfoData.forms.filter(
+      (educationBlock) => {
+        return educationBlock.id !== id;
+      }
+    );
   else if (formType === "work")
     workInfoData.forms = workInfoData.forms.filter((workBlock) => {
       return workBlock.id !== id;
